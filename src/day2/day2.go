@@ -34,13 +34,20 @@ func isPasswordValid(letter string, min int, max int, password string) bool {
 	return occurrences >= min && occurrences <= max
 }
 
+func isPasswordValidRevised(letter string, min int, max int, password string) bool {
+	first := string(password[min-1]) == letter
+	second := string(password[max-1]) == letter
+
+	return (first || second) && !(first && second)
+}
+
 func isLineValid(line string) bool {
 	values := strings.Split(line, " ")
 	bounds := strings.Split(values[0], "-")
 	min, _ := strconv.Atoi(bounds[0])
 	max, _ := strconv.Atoi(bounds[1])
 
-	return isPasswordValid(strings.TrimSuffix(values[1], ":"), min, max, values[2])
+	return isPasswordValidRevised(strings.TrimSuffix(values[1], ":"), min, max, values[2])
 }
 
 func breakLines(lines []string) int {
