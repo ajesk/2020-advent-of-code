@@ -10,7 +10,20 @@ func get2020(accountNumbers []int) int {
 			}
 		}
 	}
-	return 1
+	return 0
+}
+
+func get2020By3(accountNumbers []int) int {
+	for i, s := range accountNumbers {
+		for h := i + 1; h < len(accountNumbers); h++ {
+			for j := h + 1; j < len(accountNumbers); j++ {
+				if s+accountNumbers[h]+accountNumbers[j] == 2020 {
+					return s * accountNumbers[h] * accountNumbers[j]
+				}
+			}
+		}
+	}
+	return 0
 }
 
 func main() {
@@ -203,6 +216,6 @@ func main() {
 		1518,
 		1825,
 		1987}
-	result := get2020(accountNumbers)
+	result := get2020By3(accountNumbers)
 	fmt.Println(result)
 }
